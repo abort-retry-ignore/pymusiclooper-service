@@ -1,0 +1,11 @@
+services:
+  pymusiclooper:
+    build: .
+    ports:
+      - "7070:7070"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "python3 -c \"import urllib.request; urllib.request.urlopen('http://localhost:7070/health')\""]
+      interval: 10s
+      timeout: 5s
+      retries: 5
